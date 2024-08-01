@@ -24,5 +24,5 @@ int main() {
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
-eturn 0;
+return 0;
 }
