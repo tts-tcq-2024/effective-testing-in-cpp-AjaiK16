@@ -17,7 +17,6 @@ void printColorMap() {
 }
 
 void testColorPair() {
-    // Test specific pairs
     assert(getColorPair(0, 0) == "0 | White | Blue");
     assert(getColorPair(0, 1) == "1 | White | Orange");
     assert(getColorPair(1, 0) == "5 | Red | Blue");
@@ -59,7 +58,7 @@ void testPrintColorMap() {
             actualOutput += getColorPair(i, j) + "\n";
         }
     }
-    assert(actualOutput != expectedOutput);  // This should fail if the output is incorrect
+    assert(actualOutput != expectedOutput);
 }
 
 int main() {
