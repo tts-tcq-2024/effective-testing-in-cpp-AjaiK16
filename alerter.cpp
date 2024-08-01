@@ -35,15 +35,13 @@ void testAlertInCelcius() {
     StubNetworkInterface stubNetwork;
     alertFailureCount = 0;  // Resetting the failure count before test
 
-    // These should result in alerts failing
     alertInCelcius(400.5, &stubNetwork);
     alertInCelcius(392.0, &stubNetwork);
     
-    // These should not result in alerts failing
     alertInCelcius(303.6, &stubNetwork);
     alertInCelcius(98.6, &stubNetwork);
 
-    assert(alertFailureCount == 2);  // Should fail if error handling is incorrect
+    assert(alertFailureCount == 2); 
 }
 
 int main() {
