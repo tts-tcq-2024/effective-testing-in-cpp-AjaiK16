@@ -13,9 +13,9 @@ char determineSize(int cms) {
 
 void testDetermineSize() {
     assert(determineSize(37) == 'S');
-    assert(determineSize(38) == 'M');
+    assert(determineSize(38) == 'M');  // This should fail because 38 is not handled properly
     assert(determineSize(40) == 'M');
-    assert(determineSize(42) == 'M');
+    assert(determineSize(42) == 'M');  // This should fail because 42 is not handled properly
     assert(determineSize(43) == 'L');
 }
 
@@ -24,5 +24,4 @@ int main() {
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
-return 0;
-}
+
