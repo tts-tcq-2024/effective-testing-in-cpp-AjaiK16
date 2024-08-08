@@ -1,33 +1,53 @@
 #include <iostream>
-#include <vector>
+#include <sstream>
 #include <cassert>
 #include <string>
 
-int printColorMap() {
-    // Using std::vector and std::string for type safety and convenience
-    std::vector<std::string> majorColor = {"White", "Red", "Black", "Yellow", "Violet"};
-    std::vector<std::string> minorColor = {"Blue", "Orange", "Green", "Brown", "Slate"};
-    int count = 0;
+std::string getColorPair(int majorIndex, int minorIndex) {
+    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
+    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
+    return std::to_string(majorIndex * 5 + minorIndex) + " | " + majorColor[majorIndex] + " | " + minorColor[minorIndex];
+}
 
-    // Using range-based for loops for better readability
-    for (size_t i = 0; i < majorColor.size(); ++i) {
-        for (size_t j = 0; j < minorColor.size(); ++j) {
-            if (j == 2) { // Introducing a defect: skip printing for index 2
-                continue;
-            }
-            std::cout << i * 5 + j << " | " << majorColor[i] << " | " << minorColor[j] << std::endl;
-            assert(!majorColor[i].empty()); // Check that the string is not empty
-            assert(!minorColor[j].empty()); // Check that the string is not empty
-            ++count;
+void printColorMap(std::ostream& os) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            os << getColorPair(i, j) << "\n";
         }
     }
+}
 
-    return count;
+void testColorPair() {
+    assert(getColorPair(0, 0) == "0 | White | Blue");
+    assert(getColorPair(0, 1) == "1 | White | Orange");
+    assert(getColorPair(1, 0) == "5 | Red | Blue");
+    assert(getColorPair(2, 4) == "14 | Black | Slate");
+    assert(getColorPair(4, 4) == "24 | Violet | Slate");
+}
+
+void testPrintColorMap() {
+    // Capture the output
+    std::ostringstream actualOutputStream;
+    printColorMap(actualOutputStream);
+    std::string actualOutput = actualOutputStream.str();
+
+    // Generate the expected output programmatically
+    std::ostringstream expectedOutputStream;
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            expectedOutputStream << getColorPair(i, j) << "\n";
+        }
+    }
+    std::string expectedOutput = expectedOutputStream.str();
+
+    // Compare outputs
+    assert(actualOutput == expectedOutput);
 }
 
 int main() {
-    int result = printColorMap();
-    assert(result == 20); // Fixed assertion to account for the defect
-    std::cout << "All is well (maybe!)" << std::endl;
+    testColorPair();
+    testPrintColorMap();
+    printColorMap(std::cout);
+    std::cout << "All is well (maybe!)\n";
     return 0;
 }
