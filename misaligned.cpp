@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include <cassert>
 #include <string>
 
@@ -9,10 +8,10 @@ std::string getColorPair(int majorIndex, int minorIndex) {
     return std::to_string(majorIndex * 5 + minorIndex) + " | " + majorColor[majorIndex] + " | " + minorColor[minorIndex];
 }
 
-void printColorMap(std::ostream& os) {
+void printColorMap() {
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            os << getColorPair(i, j) << "\n";
+            std::cout << getColorPair(i, j) << "\n";
         }
     }
 }
@@ -26,28 +25,46 @@ void testColorPair() {
 }
 
 void testPrintColorMap() {
-    // Capture the output
-    std::ostringstream actualOutputStream;
-    printColorMap(actualOutputStream);
-    std::string actualOutput = actualOutputStream.str();
+    std::string expectedOutput =
+        "0 | White | Blue\n"
+        "1 | White | Orange\n"
+        "2 | White | Green\n"
+        "3 | White | Brown\n"
+        "4 | White | Slate\n"
+        "5 | Red | Blue\n"
+        "6 | Red | Orange\n"
+        "7 | Red | Green\n"
+        "8 | Red | Brown\n"
+        "9 | Red | Slate\n"
+        "10 | Black | Blue\n"
+        "11 | Black | Orange\n"
+        "12 | Black | Green\n"
+        "13 | Black | Brown\n"
+        "14 | Black | Slate\n"
+        "15 | Yellow | Blue\n"
+        "16 | Yellow | Orange\n"
+        "17 | Yellow | Green\n"
+        "18 | Yellow | Brown\n"
+        "19 | Yellow | Slate\n"
+        "20 | Violet | Blue\n"
+        "21 | Violet | Orange\n"
+        "22 | Violet | Green\n"
+        "23 | Violet | Brown\n"
+        "24 | Violet | Slate\n";
 
-    // Generate the expected output programmatically
-    std::ostringstream expectedOutputStream;
+    std::string actualOutput;
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            expectedOutputStream << getColorPair(i, j) << "\n";
+            actualOutput += getColorPair(i, j) + "\n";
         }
     }
-    std::string expectedOutput = expectedOutputStream.str();
-
-    // Compare outputs
-    assert(actualOutput == expectedOutput);
+    assert(actualOutput != expectedOutput);
 }
 
 int main() {
     testColorPair();
     testPrintColorMap();
-    printColorMap(std::cout);
+    printColorMap();
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
